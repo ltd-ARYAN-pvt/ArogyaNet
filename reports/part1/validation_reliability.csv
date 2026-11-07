@@ -1,0 +1,2 @@
+validation_images,correct_predictions,observed_accuracy,ci_95_lower,ci_95_upper
+16,16,1.0,0.7940927857921772,1.0
