@@ -1,0 +1,90 @@
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# Environment and secrets
+# ==============================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ==============================
+# Jupyter
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# VS Code / IDE
+# ==============================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# ==============================
+# Data - NEVER commit datasets
+# ==============================
+data/raw/
+data/external/
+data/processed/
+
+# ==============================
+# Model weights and checkpoints
+# ==============================
+checkpoints/
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.weights
+
+# ==============================
+# Experiment tracking
+# ==============================
+mlruns/
+mlartifacts/
+optuna.db
+*.db
+
+# ==============================
+# Generated logs and temporary files
+# ==============================
+logs/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Cache
+# ==============================
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==============================
+# OS
+# ==============================
+desktop.ini
