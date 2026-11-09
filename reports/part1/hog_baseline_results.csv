@@ -1,0 +1,2 @@
+model,seed,image_size,feature_count,accuracy,balanced_accuracy,precision,recall,f1,pr_auc
+HOG + Logistic Regression,42,128x128,8100,0.9741379310344828,0.9679469918448992,0.9844760672703752,0.9806701030927835,0.9825693996126533,0.9987565544718779

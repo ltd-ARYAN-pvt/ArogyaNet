@@ -1,0 +1,2 @@
+model,seed,image_size,radius,n_points,method,feature_count,accuracy,balanced_accuracy,precision,recall,f1,pr_auc
+LBP + Logistic Regression,42,128x128,1,8,uniform,10,0.8735632183908046,0.8404466071703338,0.9203655352480418,0.9085051546391752,0.914396887159533,0.9795275141643864
