@@ -39,3 +39,17 @@ The model achieved 87.36% accuracy, 84.04% balanced accuracy, 92.04% precision, 
 Compared with HOG, LBP performed substantially worse across all reported metrics. A possible explanation is that the global LBP histogram captures local texture frequencies but discards their spatial locations. HOG, in contrast, retains more spatially organized gradient-orientation information.
 
 These findings suggest that edge and structural representations were more discriminative than the global texture representation in this experiment. However, the comparison is specific to the selected feature configurations and does not establish that HOG is universally superior to LBP.
+
+### Task 6: Transfer Learning Using MobileNetV3Small
+
+MobileNetV3Small pretrained on ImageNet was selected for transfer learning because of its lightweight architecture and suitability for resource-constrained deployment.
+
+The model was adapted for binary chest X-ray classification using a Global Average Pooling layer, Dropout, and a sigmoid classification head. Training was conducted in two stages: initial classification-head training with the pretrained backbone frozen, followed by fine-tuning of the last 30 backbone layers while keeping Batch Normalization layers frozen.
+
+Grayscale radiographs were converted to three-channel images by replicating their intensity values across RGB channels. The model was trained using three seeds: 42, 123, and 2026.
+
+The mean validation accuracy was 97.38% ± 0.31%, balanced accuracy was 96.08% ± 0.08%, precision was 97.75% ± 0.27%, recall was 98.75% ± 0.71%, F1-score was 98.25% ± 0.22%, and PR-AUC was 99.81% ± 0.05%.
+
+The results indicate that ImageNet-pretrained features can transfer effectively to this chest X-ray classification task. However, the experiments used different stratified validation splits for each seed. Therefore, the reported standard deviations reflect both split variation and training randomness, rather than training randomness alone.
+
+The high internal validation performance does not establish clinical generalisation. Patient-level independence, possible dataset-specific shortcuts, and performance on the untouched test set require further investigation.
