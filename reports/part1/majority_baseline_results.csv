@@ -1,0 +1,2 @@
+model,majority_class,accuracy,balanced_accuracy,precision,recall,f1,pr_auc
+Majority Class Baseline,1,0.7432950191570882,0.5,0.7432950191570882,1.0,0.8527472527472527,0.7432950191570882
