@@ -217,16 +217,16 @@ Place the primary dataset in the expected project data directory before running 
 
 ### Version 2 — ArogyaNet Architecture
 
-- [ ] Design a custom CNN with fewer than 2M parameters
-- [ ] Implement depthwise separable convolutions
-- [ ] Explore residual connections
-- [ ] Implement Squeeze-and-Excitation attention
-- [ ] Conduct architecture ablations
-- [ ] Evaluate performance across three seeds
+- [x] Design a custom CNN with fewer than 2M parameters
+- [x] Implement depthwise separable convolutions
+- [x] Explore residual connections
+- [x] Implement Squeeze-and-Excitation attention
+- [x] Conduct architecture ablations
+- [x] Evaluate performance across three seeds
 
 ### Version 3 — Robustness & Model Optimization
 
-- [ ] Address class imbalance and asymmetric error costs
+- [x] Address class imbalance and asymmetric error costs
 - [ ] Cross-validation and threshold optimization
 - [ ] Regularization and ensemble experiments
 - [ ] Feature-space analysis
@@ -247,7 +247,7 @@ ArogyaNet is an educational and research project. It is not a clinically validat
 
 ## 👨‍💻 Project Status
 
-**Current Stage:** Version 1 completed — preparing Version 2.
+**Current Stage:** Version 2 completed — preparing Version 3.
 
 The project is being developed incrementally with an emphasis on reproducibility, transparent evaluation, model efficiency, and responsible AI for healthcare.
 
