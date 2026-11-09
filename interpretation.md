@@ -63,7 +63,7 @@ H3: SE attention improves channel-wise feature selection. ->	Compare with and wi
 H4: Global Average Pooling reduces classifier parameters.-> 	Compare GAP vs Flatten-based classifier.
 ```
 
-## Task 7: ArogyaNet Architecture and Ablation Study
+### Task 7: ArogyaNet Architecture and Ablation Study
 
 Five architectural variants were evaluated using three random seeds (42, 123 and 2026), with stratified 80:20 train-validation splits. For each seed, all five variants used the same data split.
 
@@ -74,3 +74,45 @@ Depthwise separable convolution (A1) reduced the parameter count to 232,001, an 
 Adding residual connections (A2) improved mean accuracy to 96.58% ± 1.08%. Adding SE attention (A3) maintained similar accuracy while producing a small improvement in mean PR-AUC. The multi-scale variant (A4) did not improve performance over A3.
 
 The results demonstrate a trade-off between model complexity and predictive performance. A0 is retained as the performance benchmark, while A3 is retained as a compact candidate for further evaluation. These are internal validation results and do not establish clinical generalisation.
+
+### Task 8: Cost-Sensitive Threshold Optimization
+
+The assignment specifies a false-negative to false-positive cost ratio of 20:1 and an expected camp prevalence of 90% NORMAL and 10% PNEUMONIA.
+
+The expected cost per child was calculated as:
+
+C = 0.9 × FPR + 2 × FNR
+
+Threshold optimization was performed independently for A0 and A3 using validation predictions across three random seeds.
+
+A0 achieved a mean optimized expected cost of 53.32 per 1,000 children, compared with 65.60 at the default threshold of 0.5, representing an approximately 18.7% reduction.
+
+A3 achieved a mean optimized expected cost of 75.89 per 1,000 children, compared with 98.43 at threshold 0.5, representing an approximately 22.9% reduction.
+
+A0 demonstrated lower expected cost and higher specificity, while A3 achieved marginally higher sensitivity. The mean selected thresholds were 0.4517 for A0 and 0.0877 for A3. A0 showed greater threshold variability across seeds, indicating sensitivity to the validation split.
+
+A0 was therefore retained as the preferred performance candidate, while A3 was retained as the compact alternative. These thresholds are preliminary validation-derived operating points and require independent evaluation before any deployment claim.
+
+### Probability Calibration Analysis
+
+Probability calibration was evaluated for A0 and A3 using Platt scaling. For each of three seeds, the validation data were divided into calibration and evaluation subsets. The calibrator was fitted only on the calibration subset and evaluated on the held-out evaluation subset.
+
+For A0, Platt scaling reduced the mean Brier score from 0.01817 to 0.01686, log loss from 0.06273 to 0.05852, and expected calibration error (ECE) from 0.02115 to 0.01602.
+
+For A3, the mean Brier score decreased from 0.02936 to 0.02364, log loss from 0.11523 to 0.08309, and ECE from 0.02983 to 0.01928.
+
+PR-AUC and ROC-AUC remained unchanged after calibration, consistent with the ranking-preserving nature of a monotonic Platt transformation.
+
+A0 achieved better calibration metrics than A3. However, the evaluation subsets retained the high pneumonia prevalence of the original dataset. These results therefore do not establish calibration under the assumed 10% camp prevalence or under external distribution shift.
+
+### Prior Probability Shift Correction
+
+Prior probability correction was investigated to account for the difference between the source dataset prevalence and the assumed rural health camp prevalence.
+
+The source pneumonia prevalence was approximately 74%, whereas the target camp prevalence was assumed to be 10%. Platt-calibrated probabilities were adjusted using prior odds correction under the label-shift assumption.
+
+For A0, weighted Brier score decreased from 0.03033 to 0.00958, weighted log loss decreased from 0.10695 to 0.03381, and weighted ECE decreased from 0.04994 to 0.01208.
+
+For A3, weighted Brier score decreased from 0.04657 to 0.01235, weighted log loss decreased from 0.16466 to 0.04811, and weighted ECE decreased from 0.08035 to 0.01421.
+
+A0 achieved lower weighted calibration errors than A3 after correction. These results are based on reweighting validation observations to the assumed target prevalence and do not constitute independent validation on real camp data. The label-shift assumption must be verified before clinical interpretation.
