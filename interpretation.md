@@ -53,3 +53,24 @@ The mean validation accuracy was 97.38% ± 0.31%, balanced accuracy was 96.08% �
 The results indicate that ImageNet-pretrained features can transfer effectively to this chest X-ray classification task. However, the experiments used different stratified validation splits for each seed. Therefore, the reported standard deviations reflect both split variation and training randomness, rather than training randomness alone.
 
 The high internal validation performance does not establish clinical generalisation. Patient-level independence, possible dataset-specific shortcuts, and performance on the untouched test set require further investigation.
+
+### Hypothesis in Task 7:
+```markdown
+Hypothesis ->	Experiment
+H1: Depthwise separable convolutions reduce model complexity without excessive performance loss. -> 	Compare standard vs depthwise separable convolutions.
+H2: Residual connections improve optimization and feature learning. ->  	Compare residual vs non-residual blocks.
+H3: SE attention improves channel-wise feature selection. ->	Compare with and without SE.
+H4: Global Average Pooling reduces classifier parameters.-> 	Compare GAP vs Flatten-based classifier.
+```
+
+## Task 7: ArogyaNet Architecture and Ablation Study
+
+Five architectural variants were evaluated using three random seeds (42, 123 and 2026), with stratified 80:20 train-validation splits. For each seed, all five variants used the same data split.
+
+The standard CNN (A0) achieved the highest mean validation accuracy of 97.77% ± 0.40% and PR-AUC of 99.93% ± 0.01%, with 1,941,665 parameters.
+
+Depthwise separable convolution (A1) reduced the parameter count to 232,001, an approximately 88.05% reduction compared with A0. However, its mean accuracy decreased to 91.89% ± 6.69%, indicating considerable variability across seeds.
+
+Adding residual connections (A2) improved mean accuracy to 96.58% ± 1.08%. Adding SE attention (A3) maintained similar accuracy while producing a small improvement in mean PR-AUC. The multi-scale variant (A4) did not improve performance over A3.
+
+The results demonstrate a trade-off between model complexity and predictive performance. A0 is retained as the performance benchmark, while A3 is retained as a compact candidate for further evaluation. These are internal validation results and do not establish clinical generalisation.
